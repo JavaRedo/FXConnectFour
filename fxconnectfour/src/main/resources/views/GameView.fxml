@@ -18,6 +18,19 @@
     xmlns:fx="http://javafx.com/fxml"
     fx:controller="com.javaredo.controllers.GameController">
 
-    <HBox fx:id="gameboard" alignment="CENTER" spacing="5" style="-fx-background-color: lightblue;-fx-padding: 100"></HBox>
+    <HBox fx:id="gameboard" spacing="5" style="-fx-background-color: lightblue;"></HBox>
 
+    <StackPane fx:id="overlayPane" mouseTransparent="true" visible="false">
+
+        <VBox   spacing="20" 
+            alignment="CENTER"
+            style="-fx-background-color: rgba(0,0,0,0.5);">
+            
+            <Label prefHeight="70" prefWidth="300" text="Game Over!" />
+            <Button prefHeight="70" prefWidth="300" text="Restart" onAction="#handleRestartButton"/>
+            <Button prefHeight="70" prefWidth="300" text="Quit Game"/>
+            <Button prefHeight="70" prefWidth="300" text="Back to Menu"/>
+        
+        </VBox>
+    </StackPane>
 </StackPane>

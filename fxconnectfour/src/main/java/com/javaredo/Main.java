@@ -16,7 +16,7 @@ public class Main extends javafx.application.Application {
         primaryStage.setWidth(1280);
 
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/GameView.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/MenuView.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
             primaryStage.setScene(scene);
             primaryStage.setTitle("FXConnectFour");
