@@ -4,7 +4,7 @@ import com.javaredo.model.GameModel;
 import com.javaredo.model.GameState;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
+import javafx.geometry.Insets;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -16,6 +16,9 @@ public class GameController {
 
     @FXML
     private StackPane overlayPane;
+
+    @FXML
+    private VBox overlayPaneContent;
     //slots[row][column]
     private Circle[][] slots;
 
@@ -32,20 +35,41 @@ public class GameController {
         
         this.slots = new Circle[colLength][rowLength];
 
+        setGameBoardUI(rowLength, colLength);
+        
+        //Centre the Game over overlay content 
+        StackPane.setMargin(overlayPaneContent, new Insets(100,0,0,450));
+        StackPane.setMargin(gameboard, new Insets(60,0,0,325));
+
+    }
+
+    private void setGameBoardUI(int rowLength, int colLength) {
+
         for (int i = 0; i < rowLength; i++) {
-            StackPane columnPane = new StackPane();
+
+            StackPane columnPane = new StackPane(); 
+
+            //each column holds its column value needed for
+            //updating the board
             columnPane.setUserData(i);
+
             VBox column = new VBox(10);
 
          for (int j = 0; j < colLength; j++) {
+            //create slot and style
             Circle slot = new Circle(30);
             slot.setStyle("-fx-stroke-width:2; -fx-stroke: black; -fx-fill: white;");
 
+            //create cell and style 
             StackPane cell = new StackPane(slot);
             cell.setStyle("-fx-padding: 10");
-    
+
+            //scene graph for a column
+            //clumnPane stack pane -> column VBox -> cell stack pane -> slot Circle
+
             column.getChildren().add(cell);
 
+            //add slot to 2d array for lookup when modifying scene graph
             slots[j][i] = slot;
 
          }
@@ -56,7 +80,6 @@ public class GameController {
 
             gameboard.getChildren().add(columnPane);
         }
-
     }
 
     /**
@@ -109,7 +132,6 @@ public class GameController {
 
                     overlayPane.setVisible(true);
                     overlayPane.setMouseTransparent(false);
-
 
                 }
             }

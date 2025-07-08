@@ -13,20 +13,19 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.Button?>
 
-<StackPane style="-fx-background-color: white" 
+<StackPane style="-fx-background-color: lightblue;" 
     xmlns="http://javafx.com/javafx"
     xmlns:fx="http://javafx.com/fxml"
     fx:controller="com.javaredo.controllers.GameController">
 
-    <HBox fx:id="gameboard" spacing="5" style="-fx-background-color: lightblue;"></HBox>
+    <HBox fx:id="gameboard" spacing="5"></HBox>
 
-    <StackPane fx:id="overlayPane" mouseTransparent="true" visible="false">
+    <StackPane fx:id="overlayPane" mouseTransparent="true" visible="false" style="-fx-background-color: rgba(0,0,0,0.5);">
 
         <VBox   spacing="20" 
-            alignment="CENTER"
-            style="-fx-background-color: rgba(0,0,0,0.5);">
+            fx:id="overlayPaneContent">
             
-            <Label prefHeight="70" prefWidth="300" text="Game Over!" />
+            <Label alignment ="CENTER" prefHeight="70" prefWidth="300" text="Game Over!" style="-fx-font-size:50;"/>
             <Button prefHeight="70" prefWidth="300" text="Restart" onAction="#handleRestartButton"/>
             <Button prefHeight="70" prefWidth="300" text="Quit Game"/>
             <Button prefHeight="70" prefWidth="300" text="Back to Menu"/>

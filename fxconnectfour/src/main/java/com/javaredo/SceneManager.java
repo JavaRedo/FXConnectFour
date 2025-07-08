@@ -1,7 +1,4 @@
 package com.javaredo;
-
-import java.io.IOException;
-
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;

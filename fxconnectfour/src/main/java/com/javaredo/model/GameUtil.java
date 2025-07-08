@@ -1,7 +1,5 @@
 package com.javaredo.model;
 
-import java.util.ArrayList;
-
 public class GameUtil {
     
     public static boolean checkDiagonalWin(int[][] gameboard, int moveCol, int moveRow, int currentPlayer) {

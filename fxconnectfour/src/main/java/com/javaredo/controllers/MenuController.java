@@ -1,9 +1,6 @@
 package com.javaredo.controllers;
 
 import com.javaredo.SceneManager;
-import com.javaredo.model.GameModel;
-
-import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
