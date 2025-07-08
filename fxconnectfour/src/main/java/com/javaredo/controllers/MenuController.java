@@ -30,4 +30,16 @@ public class MenuController {
         javafx.application.Platform.exit();
     }
 
+    @FXML
+    private void hadnleQuitGameButton() {
+        System.out.println("Quit Game button clicked!");
+        javafx.application.Platform.exit();
+    }
+
+    @FXML
+    private void handleBackToMenuFunction() {
+        System.out.println("Quit Game button clicked!");
+        javafx.application.Platform.exit();
+    }
+
 }

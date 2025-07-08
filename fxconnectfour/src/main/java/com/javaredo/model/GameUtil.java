@@ -17,9 +17,10 @@ public class GameUtil {
 
         int count = 0; 
 
-        count = countInDirection(gameboard,currentPlayer, upperRightVector, moveRow,moveCol,count) + 
-                countInDirection(gameboard,currentPlayer, bottomLeftVector,moveRow,moveCol,count) + 1;
-        
+        count = countInDirection(gameboard,currentPlayer, upperRightVector, moveRow,moveCol,count); 
+        count = countInDirection(gameboard,currentPlayer, bottomLeftVector,moveRow,moveCol,count); 
+        count +=1;
+
         boolean isWin = count == 4;
 
         return isWin;
@@ -38,7 +39,7 @@ public class GameUtil {
         tempRow += direction[0];
         tempCol += direction[1];
 
-        while(tempRow >= 0 && tempRow < nRows && tempCol >= 0 && tempCol < nCols)
+        while(tempRow >= 0 && tempRow < nRows && tempCol >= 0 && tempCol < nCols && count<3)
         {
             if(gameboard[tempRow][tempCol] == currentPlayer){
                 count+=1;
@@ -61,9 +62,12 @@ public class GameUtil {
 
         int count = 0; 
 
-        count = countInDirection(gameboard,currentPlayer, upperLeftVector, moveRow,moveCol,count) + 
-                countInDirection(gameboard,currentPlayer, bottomRightVector,moveRow,moveCol,count) + 1;
+        count =  countInDirection(gameboard,currentPlayer, upperLeftVector, moveRow,moveCol,count);
+        count = countInDirection(gameboard,currentPlayer, bottomRightVector,moveRow,moveCol,count);
         
+        //count current move
+        count+= 1;
+
         boolean isWin = count == 4;
 
         return isWin;
@@ -76,9 +80,11 @@ public class GameUtil {
 
         int count = 0; 
 
-        count = countInDirection(gameboard,currentPlayer, left, moveRow,moveCol,count) + 
-                countInDirection(gameboard,currentPlayer, right,moveRow,moveCol,count) + 1;
+        count = countInDirection(gameboard,currentPlayer, left, moveRow,moveCol,count); 
+        count = countInDirection(gameboard,currentPlayer, right,moveRow,moveCol,count);
         
+        count+=1;
+
         boolean isWin = count == 4;
 
         return isWin;
@@ -90,9 +96,11 @@ public class GameUtil {
 
         int count = 0; 
 
-        count = countInDirection(gameboard,currentPlayer, up, moveRow,moveCol,count) + 
-                countInDirection(gameboard,currentPlayer, down,moveRow,moveCol,count) + 1;
+        count = countInDirection(gameboard,currentPlayer, up, moveRow,moveCol,count); 
+        count = countInDirection(gameboard,currentPlayer, down,moveRow,moveCol,count);
         
+        count+=1;
+
         boolean isWin = count == 4;
 
         return isWin;

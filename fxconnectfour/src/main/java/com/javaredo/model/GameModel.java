@@ -21,7 +21,7 @@ public class GameModel {
     public void initialize(){
         //2d array of board entries are either 0 or 1
         //0 -> empty
-        // 1 -> first player
+        //1 -> first player
         //2 -> second player
 
         for (int i = 0; i < this.nRows; i++) {

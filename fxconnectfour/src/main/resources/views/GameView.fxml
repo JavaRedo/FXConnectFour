@@ -27,8 +27,8 @@
             
             <Label alignment ="CENTER" prefHeight="70" prefWidth="300" text="Game Over!" style="-fx-font-size:50;"/>
             <Button prefHeight="70" prefWidth="300" text="Restart" onAction="#handleRestartButton"/>
-            <Button prefHeight="70" prefWidth="300" text="Quit Game"/>
-            <Button prefHeight="70" prefWidth="300" text="Back to Menu"/>
+            <!-- <Button prefHeight="70" prefWidth="300" text="Quit Game" onAction="#handleQuitGameButton"/>
+            <Button prefHeight="70" prefWidth="300" text="Back to Menu" onAction="#handleBackToMenuButton"/> -->
         
         </VBox>
     </StackPane>
