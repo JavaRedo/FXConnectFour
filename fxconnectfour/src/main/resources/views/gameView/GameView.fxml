@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?import javafx.scene.layout.StackPane?>
+
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.shape.Circle?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Button?>
+
+<StackPane style="-fx-background-color: lightblue;" 
+        xmlns="http://javafx.com/javafx"
+        xmlns:fx="http://javafx.com/fxml"
+        fx:controller="com.javaredo.controllers.GameController"
+        stylesheets="@gameStyle.css">
+    
+    <!--content-->
+    <HBox>
+        
+        <VBox spacing="20">
+            <Button styleClass="gameButton" alignment="CENTER" prefHeight="70" prefWidth="300" 
+                text="Save"
+                onAction="#handleSaveGame" />
+            <Button styleClass="gameButton" alignment="CENTER" prefHeight="70" prefWidth="300" 
+                text="Load Game"
+                onAction="#handleLoadGame"/>
+            <Button styleClass="gameButton" alignment="CENTER" prefHeight="70" prefWidth="300" 
+                text="Quit Game"
+                onAction="#handleQuitGame"/>
+        </VBox>
+        
+        <StackPane>
+            <HBox fx:id="gameboard" spacing="5"></HBox>
+        </StackPane>
+
+    </HBox>
+
+    <!-- game end overlay-->
+    <StackPane fx:id="overlayPane" mouseTransparent="true" visible="false" style="-fx-background-color: rgba(0,0,0,0.5);">
+    
+            <VBox   spacing="20" 
+                fx:id="overlayPaneContent">
+                
+                <Label alignment ="CENTER" prefHeight="70" prefWidth="300" text="Game Over!" style="-fx-font-size:50;"/>
+                <Label ></Label>
+                <Button prefHeight="70" prefWidth="300" text="Restart" onAction="#handleRestartButton"/>
+                <!-- <Button prefHeight="70" prefWidth="300" text="Quit Game" onAction="#handleQuitGameButton"/>
+                <Button prefHeight="70" prefWidth="300" text="Back to Menu" onAction="#handleBackToMenuButton"/> -->
+            
+            </VBox>
+    </StackPane>
+</StackPane>

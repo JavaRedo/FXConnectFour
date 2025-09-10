@@ -1,10 +1,10 @@
 package com.javaredo.controllers;
 
+import com.javaredo.SceneManager;
 import com.javaredo.model.GameModel;
-import com.javaredo.model.GameState;
+
 
 import javafx.fxml.FXML;
-import javafx.geometry.Insets;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -23,23 +23,23 @@ public class GameController {
     private Circle[][] slots;
 
     private GameModel model;
+    private SceneManager sceneManager;
     
-    public GameController(){}
-
+    public GameController(SceneManager sceneManager, GameModel model){
+        this.model = model;
+        this.sceneManager = sceneManager;
+    }
+    
     @FXML
     public void initialize(){
-        int rowLength = 7;
-        int colLength = 6;
-        this.model = new GameModel(colLength, rowLength, 1);
-        this.model.initialize();
-        
-        this.slots = new Circle[colLength][rowLength];
+        //settings and model object needed 
 
-        setGameBoardUI(rowLength, colLength);
-        
-        //Centre the Game over overlay content 
-        StackPane.setMargin(overlayPaneContent, new Insets(100,0,0,450));
-        StackPane.setMargin(gameboard, new Insets(60,0,0,325));
+        // model.nRows = col length
+        // model.nCols = row length
+
+        this.slots = new Circle[model.getRowsLen()][model.getColsLen()];
+
+        this.setGameBoardUI(model.getColsLen(), model.getRowsLen());
 
     }
 
@@ -52,20 +52,30 @@ public class GameController {
             //each column holds its column value needed for
             //updating the board
             columnPane.setUserData(i);
+            columnPane.getStyleClass().add("columnPane");
 
             VBox column = new VBox(10);
 
          for (int j = 0; j < colLength; j++) {
             //create slot and style
             Circle slot = new Circle(30);
-            slot.setStyle("-fx-stroke-width:2; -fx-stroke: black; -fx-fill: white;");
-
-            //create cell and style 
             StackPane cell = new StackPane(slot);
-            cell.setStyle("-fx-padding: 10");
+            
+            //create cell and style 
+            slot.getStyleClass().add("slot");
+            
+            int currentToken = model.getTokenAt(j,i);
+            if(currentToken == 1){
+                slot.getStyleClass().add("player1token");
+            }
+            else if(currentToken == 2){
+                slot.getStyleClass().add("player2token");                
+            }
+
+            cell.getStyleClass().add("cell");
 
             //scene graph for a column
-            //clumnPane stack pane -> column VBox -> cell stack pane -> slot Circle
+            //columnPane stack pane -> column VBox -> cell stack pane -> slot Circle
 
             column.getChildren().add(cell);
 
@@ -85,28 +95,18 @@ public class GameController {
     /**
      * Sets: 
      * 
-     * Mouse entered event
-     * Mouse exited event
      * Mouse clicked event 
      * 
      * for the column pane input component
      * @param columnPane
      */
     private void setUpColumnEvents(StackPane columnPane) {
-        columnPane.setOnMouseEntered(event->{
-            columnPane.setStyle("-fx-background-color: lightyellow");
-
-        });
-
-        columnPane.setOnMouseExited(event->{
-            columnPane.setStyle("-fx-background-color: lightblue");
-            
-        });
 
         columnPane.setOnMouseClicked(event->{
             int col = (int) columnPane.getUserData();
             System.out.println(col);
             int selectedRow = model.insertToken(col);
+            
             if(selectedRow == -1){
                 System.out.println("Column is full chose empty slot");
             }
@@ -114,22 +114,15 @@ public class GameController {
                 Circle slot = slots[selectedRow][col];
 
                 if(model.getActivePlayer() == 1){
-                    slot.setStyle("-fx-stroke-width:2; -fx-stroke: black; -fx-fill: red;");
-
+                    slot.getStyleClass().add("player1token");
                 }
                 else{
-                    slot.setStyle("-fx-stroke-width:2; -fx-stroke: black; -fx-fill: yellow;");
+                    slot.getStyleClass().add("player2token");
                 }
                 
                 model.updateActivePlayer();
-                if(model.getGameState() == GameState.GAMEOVER){
-                    // gameboard.getChildren().clear();
-                    // Label gameEndLabel = new Label("Player " + model.getActivePlayer() + " wins");
-                    // gameEndLabel.setStyle("-fx-font-size: 32");
-                    // gameboard.getChildren().add(gameEndLabel);
-
-                    // gameboard.getChildren()
-
+                
+                if(model.getGameState().isGameOver()){
                     overlayPane.setVisible(true);
                     overlayPane.setMouseTransparent(false);
 
@@ -144,7 +137,23 @@ public class GameController {
         gameboard.getChildren().clear();
         overlayPane.setVisible(false);
         overlayPane.setMouseTransparent(true);
+        this.model.initialize();
         initialize();
     }
+
+    @FXML
+    private void handleQuitGame(){
+        javafx.application.Platform.exit();
+    };
+    
+    @FXML
+    private void handleSaveGame(){
+        sceneManager.showSave();
+    };
+    
+    @FXML
+    private void handleLoadGame(){
+        sceneManager.showLoad();
+    };
 
 }

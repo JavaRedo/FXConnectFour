@@ -1,0 +1,55 @@
+.columnPane{
+    -fx-background-color: lightblue
+}
+
+.columnPane:hover{
+    -fx-background-color: lightyellow
+}
+
+.gameButton{
+     -fx-font-family: "Fredoka Medium";
+    -fx-font-size: 24;
+    -fx-font-weight: bold; 
+    -fx-background-color: #B0BEC5;
+    -fx-text-fill: black;
+    -fx-background-radius: 16;
+    -fx-translate-x:30px;
+    -fx-translate-y:60px;
+}
+
+.gameButton:hover{
+    -fx-cursor:hand;
+    -fx-translate-x:20px;
+}
+
+#overlayPaneContent{
+    -fx-translate-x:450px;
+    -fx-translate-y:100px;
+}
+
+#gameboard{
+    -fx-translate-x:125px;
+    -fx-translate-y:60px;
+}
+
+.slot{
+    -fx-stroke-width:2;
+    -fx-stroke: black;
+    -fx-fill: white;
+}
+
+.cell{
+    -fx-padding:10
+}
+
+.player1token{
+    -fx-stroke-width:2;
+    -fx-stroke: black;
+    -fx-fill: red;
+}
+
+.player2token{
+    -fx-stroke-width:2;
+    -fx-stroke: black;
+    -fx-fill: yellow;
+}

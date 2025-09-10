@@ -1,6 +1,11 @@
 package com.javaredo.model;
 
-public class GameModel {
+import java.io.Serializable;
+
+import com.javaredo.model.GameStates.GameState;
+import com.javaredo.model.GameStates.PlayingState;
+
+public class GameModel implements Serializable {
 
     private int[][] board;
     private int[] nextAvailableRow;
@@ -24,18 +29,26 @@ public class GameModel {
         //1 -> first player
         //2 -> second player
 
+        resetBoard();
+
+        resetNARds();
+
+        this.state = PlayingState.PLAYER_1_TURN;
+    }
+
+    private void resetNARds() {
+        for (int j = 0; j < nextAvailableRow.length; j++) {
+            nextAvailableRow[j] = nRows-1;    
+        }
+    }
+
+    private void resetBoard() {
         for (int i = 0; i < this.nRows; i++) {
             int[] col = board[i];
             for (int j = 0; j < this.nCols; j++) {
                 col[j] = 0;
             }
         }
-
-        for (int j = 0; j < nextAvailableRow.length; j++) {
-            nextAvailableRow[j] = nRows-1;    
-        }
-
-        this.state = GameState.ONGOING;
     }
 
     public int insertToken(int moveCol){
@@ -51,7 +64,7 @@ public class GameModel {
 
         nextAvailableRow[moveCol] -=1;
         
-        if(state == GameState.GAMEOVER){
+        if(state.isGameOver()){
             return moveRow;
         }
         //for debugging
@@ -64,10 +77,9 @@ public class GameModel {
                 GameUtil.checkVerticalWin(gameboard,moveCol,moveRow,this.currentPlayer) || 
                 GameUtil.checkHorizontalWin(gameboard,moveCol,moveRow,this.currentPlayer);
         if(isWin){
-            this.state = GameState.GAMEOVER;
+            this.state = state.getGameOver();
         }
         }
-
 
     public void updateActivePlayer() {
         if(this.currentPlayer == 1){
@@ -82,20 +94,31 @@ public class GameModel {
         return this.currentPlayer;    
     }
 
-    private void printModelBoard(){
+    // private void printModelBoard(){
 
-        for (int i = 0; i < nRows; i++) {
-            for (int j = 0; j < nCols; j++) {
-                int element = this.board[i][j];
-                System.out.print(element + " ");
-            }
-            System.out.println("");
-        }
-    }
+    //     for (int i = 0; i < nRows; i++) {
+    //         for (int j = 0; j < nCols; j++) {
+    //             int element = this.board[i][j];
+    //             System.out.print(element + " ");
+    //         }
+    //         System.out.println("");
+    //     }
+    // }
 
     public GameState getGameState(){
         return state;
     }
 
+    public int getRowsLen(){
+        return this.nRows;
+    }
+    public int getColsLen(){
+        return this.nCols;
+    }
+
+    public int getTokenAt(int row,int col) {
+
+        return this.board[row][col];
+    }
 
 }

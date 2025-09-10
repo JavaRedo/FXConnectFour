@@ -1,30 +1,34 @@
 package com.javaredo;
 
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
+import com.javaredo.model.GameModel;
+import com.javaredo.util.FontLoader;
+import com.javaredo.util.SaveManager;
+
 import javafx.stage.Stage;
 
 public class Main extends javafx.application.Application {
     
     @Override
     public void start(Stage primaryStage){
+        
+        AppContext ctx = new AppContext(
+            new GameModel(6, 7, 1),
+            new SaveManager()
+            );
+            
+        FontLoader.load("/fonts/fredoka/Static/Fredoka-Medium.ttf", 8*5);
+        
+        configStage(primaryStage);
 
-        SceneManager.initialize(primaryStage);
+        SceneManager sm = new SceneManager(primaryStage,ctx);
+        
+        sm.showMenu();
 
+    }
+    private void configStage(Stage primaryStage) {
         primaryStage.setResizable(false);
         primaryStage.setHeight(720);
         primaryStage.setWidth(1280);
-
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/MenuView.fxml"));
-            Scene scene = new Scene(fxmlLoader.load());
-            primaryStage.setScene(scene);
-            primaryStage.setTitle("FXConnectFour");
-            primaryStage.show();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     } 
     public static void main(String[] args) {
         launch(args);

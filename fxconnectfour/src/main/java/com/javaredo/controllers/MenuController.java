@@ -1,6 +1,8 @@
 package com.javaredo.controllers;
 
 import com.javaredo.SceneManager;
+import com.javaredo.util.SaveManager;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
@@ -11,6 +13,12 @@ public class MenuController {
 
     @FXML
     private Button QuitGameButton;
+    
+    SceneManager sceneManager;
+ 
+    public MenuController(SceneManager sceneManager){
+        this.sceneManager = sceneManager;
+    }
 
     @FXML
     public void initialize() {
@@ -21,7 +29,7 @@ public class MenuController {
     @FXML
     private void handleNewGame() {
         System.out.println("Start Game button clicked!");
-        SceneManager.getSceneManager().switchScene("/views/GameView.fxml");
+        sceneManager.showGame();
 
     }
     @FXML
@@ -30,11 +38,11 @@ public class MenuController {
         javafx.application.Platform.exit();
     }
 
-    @FXML
-    private void hadnleQuitGameButton() {
-        System.out.println("Quit Game button clicked!");
-        javafx.application.Platform.exit();
+        @FXML
+    private void handleLoadGame() {
+        sceneManager.showLoad();
     }
+
 
     @FXML
     private void handleBackToMenuFunction() {

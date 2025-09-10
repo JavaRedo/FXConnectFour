@@ -1,0 +1,45 @@
+/* saveContainer.getStyleClass().add("save-container");
+dateOfSave.getStyleClass().add("date-of-save");
+savePosition.getStyleClass().add("save-position");
+saveButton.getStyleClass().add("save-button"); */
+
+
+.load-container{
+    -fx-background-color:grey;
+    -fx-height:50px;
+    -fx-width:100px;
+}
+
+.load-button{
+    -fx-font-family: "Fredoka Medium";
+    -fx-font-size: 36;
+    -fx-font-weight: bold; 
+    -fx-background-radius: 15;
+    -fx-text-fill:white;
+    -fx-background-color: #1976D2;
+    -fx-font-smoothing-type: lcd;
+    -fx-height:40px;
+}
+
+.load-button:hover{
+    -fx-text-fill:yellow;
+    -fx-cursor:hand;
+    
+}
+
+.delete-button{
+    -fx-font-family: "Fredoka Medium";
+    -fx-font-size: 36;
+    -fx-font-weight: bold; 
+    -fx-background-radius: 15;
+    -fx-text-fill:white;
+    -fx-background-color: #1976D2;
+    -fx-font-smoothing-type: lcd;
+    -fx-height:40px;
+} 
+
+.delete-button:hover{
+    -fx-text-fill:yellow;
+    -fx-cursor:hand;
+    
+}
