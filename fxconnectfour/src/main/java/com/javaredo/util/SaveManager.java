@@ -56,14 +56,16 @@ public class SaveManager implements ISaveManager {
 
             Save s = new Save(savePos); 
 
+            //create obj file
             Path file = saveRoot.resolve(String.format("slot-%02d.obj", savePos));
+            
             try (ObjectOutputStream oos =
                      new ObjectOutputStream(
                          new BufferedOutputStream(
                              Files.newOutputStream(file,
                                  StandardOpenOption.CREATE_NEW,
                                  StandardOpenOption.WRITE)))) {
-
+                // if not present create empty save file
                 oos.writeObject(s);
                 System.out.println("created new empty save slot-" +savePos );
                 oos.flush();
@@ -76,7 +78,10 @@ public class SaveManager implements ISaveManager {
 
     }
 
-    private Save readSave(Path file) {
+    private Save readSave(int savePos) {
+
+        Path file = saveRoot.resolve(String.format("slot-%02d.obj", savePos));
+
         try (ObjectInputStream ois =
                  new ObjectInputStream(
                      new BufferedInputStream(
@@ -94,62 +99,19 @@ public class SaveManager implements ISaveManager {
     @Override
     public boolean save(GameModel model,int savePos) {
 
-        Path file = saveRoot.resolve(String.format("slot-%02d.obj", savePos));
-
-        Save s = readSave(file);
+        Save s = readSave(savePos);
 
         s.setModel(model);
         s.setDate(LocalDateTime.now());
-        
-            try (ObjectOutputStream oos =
-                     new ObjectOutputStream(
-                         new BufferedOutputStream(
-                             Files.newOutputStream(file,
-                                 StandardOpenOption.CREATE,
-                                 StandardOpenOption.TRUNCATE_EXISTING,
-                                 StandardOpenOption.WRITE)))) {
 
-                oos.writeObject(s);
-                oos.flush();
-            } catch (Exception e) {
-                e.printStackTrace();
-                return false;
-            }
-
+        writeSave(s, savePos);
         return true;
     }
 
-    @Override
-    public GameModel load(int savePos) {
 
+    private void writeSave(Save s, int pos){
 
-        Path file = saveRoot.resolve(String.format("slot-%02d.obj", savePos));
-
-        Save s = readSave(file);
-
-        return s.getModel();
-    }
-
-
-    public Save[] getSaves(){
-        Save[] saves = new Save[this.numSaveSlots];
-
-        for (int savePos = 0; savePos < saves.length; savePos++) {
-            Path file = saveRoot.resolve(String.format("slot-%02d.obj", savePos));
-            Save s = readSave(file);
-
-            saves[savePos] = s;
-        }
-
-        return saves;
-    }
-
-
-    public void deleteSave(int savePos) {
-
-        Path file = saveRoot.resolve(String.format("slot-%02d.obj", savePos));
-        
-        Save s = new Save(savePos);
+        Path file = saveRoot.resolve(String.format("slot-%02d.obj", pos));
 
         try (ObjectOutputStream oos =
                      new ObjectOutputStream(
@@ -161,9 +123,38 @@ public class SaveManager implements ISaveManager {
 
                 oos.writeObject(s);
                 oos.flush();
-            } catch (Exception e) {
+        } catch (Exception e) {
                 e.printStackTrace();
-            }
+        }
+    }
+
+    @Override
+    public GameModel load(int savePos) {
+
+        Save s = readSave(savePos);
+
+        return s.getModel();
+    }
+
+
+    public Save[] getSaves(){
+        Save[] saves = new Save[this.numSaveSlots];
+
+        for (int savePos = 0; savePos < saves.length; savePos++) {
+            Save s = readSave(savePos);
+
+            saves[savePos] = s;
+        }
+
+        return saves;
+    }
+
+
+    public void deleteSave(int savePos) {
+        
+        Save s = new Save(savePos);
+
+        writeSave(s, savePos);
         
     }
 
