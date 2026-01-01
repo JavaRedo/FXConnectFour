@@ -29,8 +29,7 @@ public class HorizontalWinTest {
             this.model.insertToken(moves[i]);
         }
 
-        System.out.println(model.getGameState());
-        assertEquals(model.getGameState().toString(), "GAMEOVER");
+        assertEquals(model.getGameState().toString(), "PLAYER_1_WIN");
         assertEquals(model.getActivePlayer(),1);
     }
 
@@ -43,10 +42,8 @@ public class HorizontalWinTest {
         for (int i = 0; i < moves.length; i++) {
             this.model.insertToken(moves[i]);
         }
-        
-        System.out.println(model.getGameState());
 
-        assertEquals(model.getGameState().toString(),"GAMEOVER");
+        assertEquals(model.getGameState().toString(),"PLAYER_1_WIN");
         assertEquals(model.getActivePlayer(),1);
     }
 
@@ -62,9 +59,8 @@ public class HorizontalWinTest {
             this.model.insertToken(moves[i]);
         }
         
-        System.out.println(model.getGameState());
 
-        assertEquals(model.getGameState().toString(),"GAMEOVER");
+        assertEquals(model.getGameState().toString(),"PLAYER_1_WIN");
         assertEquals(model.getActivePlayer(),1);
     }
 
