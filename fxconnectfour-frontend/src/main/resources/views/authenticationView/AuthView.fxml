@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Button?>
+
+
+
+<StackPane style="-fx-background-color: lightblue;" 
+        xmlns="http://javafx.com/javafx"
+        xmlns:fx="http://javafx.com/fxml"
+        fx:controller="com.javaredo.controllers.AuthController"
+        >
+    <StackPane>
+        <VBox   spacing="20">
+            <TextField fx:id="username"></TextField>
+            <PasswordField fx:id="password"></PasswordField>
+            <Button onAction="#logInRequest">Log in</Button>
+        </VBox>
+
+    </StackPane>
+    
+</StackPane>

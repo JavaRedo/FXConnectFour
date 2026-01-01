@@ -4,6 +4,7 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.function.Function;
 
+import com.javaredo.controllers.AuthController;
 import com.javaredo.controllers.GameController;
 import com.javaredo.controllers.LoadController;
 import com.javaredo.controllers.MenuController;
@@ -65,6 +66,11 @@ public class SceneManager {
                 return new LoadController(this.ctx,this);
         });
     }
+    public void showLogIn(){
+        load("/views/authenticationView/AuthView.fxml", type -> {
+                return new AuthController(this.ctx,this);
+        });
+    }
 
     public void showPrevScene() {
         Function<Class<?>,Object> factory = prevScene.getValue();
@@ -79,10 +85,11 @@ public class SceneManager {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlpath));
             loader.setControllerFactory(factory::apply);
             Parent root = loader.load();
+            System.out.println("loaded fxml");
 
             
-            Scene newScene = new Scene(root);
             
+            Scene newScene = new Scene(root);
 
             //update prev scene field with top of queue
             if(prevSceneDeque.size() == 1){
@@ -101,7 +108,7 @@ public class SceneManager {
             primaryStage.setScene(newScene);
             primaryStage.show();
         } catch (IOException e) {
-            System.out.println(e.getCause().toString());
+            e.printStackTrace();
         }
     }
     
