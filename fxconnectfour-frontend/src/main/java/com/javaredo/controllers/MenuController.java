@@ -1,7 +1,6 @@
 package com.javaredo.controllers;
 
 import com.javaredo.SceneManager;
-import com.javaredo.util.SaveManager;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -30,6 +29,13 @@ public class MenuController {
     private void handleNewGame() {
         System.out.println("Start Game button clicked!");
         sceneManager.showGame();
+
+    }
+
+    @FXML
+    private void handleLogIn() {
+        System.out.println("Log in clicked!");
+        sceneManager.showLogIn();
 
     }
     @FXML

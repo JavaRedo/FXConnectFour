@@ -38,39 +38,8 @@ public class SaveController {
     private void setSaveUI(Save[] saves) {
 
         for(Save save : saves){
-            
-            //container
-            HBox saveContainer = new HBox();
-            saveContainer.setSpacing(20);
-            String dateLabel = "";
-            
-            if(save.getDate() == null){
-                dateLabel += "NO DATA";
-            }
-            else{
-                dateLabel += save.getDate().toString();
-            }
-            
-            Label dateOfSave = new Label(dateLabel);
-            Label savePosition = new Label(String.valueOf(save.getSavePosition() + 1));
-            Button saveButton = new Button("Save");
 
-            saveButton.setOnAction(e ->{
-                ctx.getSaveManager().save(ctx.getGameModel(),save.getSavePosition());
-                sceneManager.showPrevScene();              
-            });
-            
-            saveContainer.getStyleClass().add("save-container");
-            dateOfSave.getStyleClass().add("date-of-save");
-            savePosition.getStyleClass().add("save-position");
-            saveButton.getStyleClass().add("save-button");
-            
-            saveContainer.getChildren().addAll(
-                savePosition,
-                dateOfSave,
-                saveButton);
-
-            root.getChildren().addAll(saveContainer);
+            createSaveSlotUI(save);
         }
         
         Button back = new Button("back");
@@ -82,6 +51,43 @@ public class SaveController {
         root.getChildren().add(
             back
         );
+    }
+
+    private void createSaveSlotUI(Save save) {
+        //save container
+        HBox saveContainer = new HBox();
+        saveContainer.setSpacing(20);
+        String dateLabel = "";
+        
+        if(save.getDate() == null){
+            dateLabel += "NO DATA";
+        }
+        else{
+            dateLabel += save.getDate().toString();
+        }
+        
+        Label dateOfSave = new Label(dateLabel);
+        Label savePosition = new Label(String.valueOf(save.getSavePosition() + 1));
+        Button saveButton = new Button("Save");
+        
+        //triggers save on click
+        saveButton.setOnAction(e ->{
+            ctx.getSaveManager().save(ctx.getGameModel(),save.getSavePosition());
+            sceneManager.showPrevScene();              
+        });
+        
+        //add styling
+        saveContainer.getStyleClass().add("save-container");
+        dateOfSave.getStyleClass().add("date-of-save");
+        savePosition.getStyleClass().add("save-position");
+        saveButton.getStyleClass().add("save-button");
+        
+        saveContainer.getChildren().addAll(
+            savePosition,
+            dateOfSave,
+            saveButton);
+
+        root.getChildren().addAll(saveContainer);
     }
 
 
