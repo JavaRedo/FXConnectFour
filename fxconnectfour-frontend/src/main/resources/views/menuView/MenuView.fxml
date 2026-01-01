@@ -23,6 +23,7 @@
 
         <Button styleClass="menu-button" prefHeight="70" prefWidth="300" onAction="#handleNewGame">New Game</Button>
         <Button styleClass="menu-button" prefHeight="70" prefWidth="300" style="-fx-background-radius: 15" onAction="#handleLoadGame">Load Game</Button>
+        <Button styleClass="menu-button" prefHeight="70" prefWidth="300" style="-fx-background-radius: 15" onAction="#handleLogIn">Log in</Button>
         <Button styleClass="menu-button" prefHeight="70" prefWidth="300" style="-fx-background-radius: 15">Settings</Button>
         <Button styleClass="menu-button" prefHeight="70" prefWidth="300" style="-fx-background-radius: 15" onAction="#handleQuitGame">Quit Game</Button>
     </VBox>
