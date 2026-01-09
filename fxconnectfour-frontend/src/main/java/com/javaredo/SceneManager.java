@@ -8,6 +8,7 @@ import com.javaredo.controllers.GameController;
 import com.javaredo.controllers.LoadController;
 import com.javaredo.controllers.LoginController;
 import com.javaredo.controllers.MenuController;
+import com.javaredo.controllers.RegistrationController;
 import com.javaredo.controllers.SaveController;
 
 import javafx.fxml.FXMLLoader;
@@ -71,7 +72,12 @@ public class SceneManager {
                 return new LoginController(this.ctx,this);
         });
     }
-
+    
+    public void showRegistration() {
+        load("/views/registrationView/RegistrationView.fxml", type -> {
+                return new RegistrationController(this.ctx,this);
+        });
+    }
     public void showPrevScene() {
         Function<Class<?>,Object> factory = prevScene.getValue();
         String fxmlpath = prevScene.getKey();
@@ -111,6 +117,7 @@ public class SceneManager {
             e.printStackTrace();
         }
     }
+
     
 
 }

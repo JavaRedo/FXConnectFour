@@ -1,23 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.control.Button?>
 
 
-
-<StackPane style="-fx-background-color: lightblue;" 
-        xmlns="http://javafx.com/javafx"
-        xmlns:fx="http://javafx.com/fxml"
-        fx:controller="com.javaredo.controllers.LoginController"
-        >
-    <StackPane>
-        <VBox   spacing="20">
-            <TextField fx:id="username"></TextField>
-            <PasswordField fx:id="password"></PasswordField>
-            <Button onAction="#logInRequest">Log in</Button>
+<StackPane style="-fx-background-color: lightblue;"
+    xmlns="http://javafx.com/javafx"
+    xmlns:fx="http://javafx.com/fxml"
+    fx:controller="com.javaredo.controllers.LoginController"
+    stylesheets="@loginStyle.css"
+>
+    <StackPane alignment="CENTER">
+        <VBox fillWidth="true" maxWidth="600" alignment="CENTER" spacing="20">
+            <Label maxWidth="600" styleClass="pageTitle_label">Log in</Label>
+            <Label maxWidth="600" alignment="CENTER_LEFT" styleClass="login_label">username</Label>
+            <TextField promptText="username" fx:id="username" styleClass="login_entry"></TextField>
+            <Label maxWidth="600" alignment="CENTER_LEFT" styleClass="login_label">password</Label>
+            <PasswordField promptText="password" fx:id="password" styleClass="login_entry"></PasswordField>
+            <Label maxWidth="600" styleClass="reg_label" fx:id="alertLabel"></Label>
+            <Button onAction="#logInRequest" styleClass="login_bttn">Log in</Button>
+            <Button onAction="#goToRegistrationPage" styleClass="login_bttn">Create account</Button>
         </VBox>
 
     </StackPane>

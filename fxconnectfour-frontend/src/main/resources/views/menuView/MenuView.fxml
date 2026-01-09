@@ -4,6 +4,7 @@
 <?import javafx.scene.layout.StackPane?>
 
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
 
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
@@ -13,19 +14,22 @@
     xmlns:fx="http://javafx.com/fxml"
     fx:controller="com.javaredo.controllers.MenuController"
     stylesheets="@menuStyle.css">
-    
+
     <!-- <stylesheets>
         <URL value="/menuStyle.css"/>
     </stylesheets> -->
-    
-    <VBox style="-fx-background-color: white" 
-           alignment="CENTER" spacing="20">
-
-        <Button styleClass="menu-button" prefHeight="70" prefWidth="300" onAction="#handleNewGame">New Game</Button>
-        <Button styleClass="menu-button" prefHeight="70" prefWidth="300" style="-fx-background-radius: 15" onAction="#handleLoadGame">Load Game</Button>
-        <Button styleClass="menu-button" prefHeight="70" prefWidth="300" style="-fx-background-radius: 15" onAction="#handleLogIn">Log in</Button>
-        <Button styleClass="menu-button" prefHeight="70" prefWidth="300" style="-fx-background-radius: 15">Settings</Button>
-        <Button styleClass="menu-button" prefHeight="70" prefWidth="300" style="-fx-background-radius: 15" onAction="#handleQuitGame">Quit Game</Button>
+    <VBox style="-fx-background-color: white"
+        alignment="CENTER" spacing="20">
+        <Button styleClass="menu-button" prefHeight="70" prefWidth="300" onAction="#handleNewGame">New
+            Game</Button>
+        <Button styleClass="menu-button" prefHeight="70" prefWidth="300"
+            style="-fx-background-radius: 15" onAction="#handleLoadGame">Load Game</Button>
+        <Button styleClass="menu-button" prefHeight="70" prefWidth="300"
+            style="-fx-background-radius: 15" onAction="#handleLogIn">Log in</Button>
+        <Button styleClass="menu-button" prefHeight="70" prefWidth="300"
+            style="-fx-background-radius: 15">Settings</Button>
+        <Button styleClass="menu-button" prefHeight="70" prefWidth="300"
+            style="-fx-background-radius: 15" onAction="#handleQuitGame">Quit Game</Button>
     </VBox>
 
 </StackPane>

@@ -1,4 +1,4 @@
-package com.javaredo.fxconnectfour_backend.controllers;
+package com.javaredo.fxconnectfour_backend.auth;
 
 import org.springframework.http.*;
 import org.springframework.security.authentication.*;
@@ -14,9 +14,11 @@ import jakarta.servlet.http.HttpServletRequest;
 public class AuthController {
 
     private final AuthenticationManager authManager;
+    private final AuthService authService;
 
-    public AuthController(AuthenticationManager authManager) {
+    public AuthController(AuthenticationManager authManager,AuthService authService) {
         this.authManager = authManager;
+        this.authService = authService;
     }
 
     public record LoginRequest(String username, String password) {}
@@ -39,4 +41,30 @@ public class AuthController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
         }
     }
+
+    @PostMapping("/register")
+    public ResponseEntity<?> registerNewUser(
+        @RequestBody LoginRequest req,
+        HttpServletRequest httpRequest) {
+            System.out.println(req.username);
+            System.out.println(req.password);
+        
+        // add some username and password validation
+        // username between 3 and 15 chars
+        // - have at least one upper case letter
+        // password must be
+        // - have at least  one Lower case letter
+        // - be at least 8 chars long
+        // - have at least one special charachter 
+
+        try{
+            authService.register(req.username,req.password);
+            return ResponseEntity.ok("user succesfully registered");
+        }
+        catch(Exception e){
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("User alredy exists");
+        }
+    }
+
+
 }

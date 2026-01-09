@@ -3,10 +3,13 @@ package com.javaredo;
 import com.javaredo.model.GameModel;
 import com.javaredo.util.SaveManager;
 
+import javafx.util.Pair;
+
 public class AppContext {
     
     private  GameModel model;
     private  SaveManager saveManager;
+    private Pair<String,String> authenticatedCredentials;
 
     public AppContext(
         GameModel model,
@@ -31,6 +34,11 @@ public class AppContext {
 
     public void setGameModel(GameModel gameModel) {
         this.model = gameModel;
+    }
+
+
+    public void setAuthenticatedCredentials(String username, String password) {
+        this.authenticatedCredentials = new Pair<String,String>(username, password);
     }
 
 

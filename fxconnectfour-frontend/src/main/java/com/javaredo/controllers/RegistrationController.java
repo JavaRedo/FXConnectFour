@@ -11,13 +11,11 @@ import com.javaredo.AppContext;
 import com.javaredo.SceneManager;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
-public class LoginController {
 
-    AppContext ctx;
+public class RegistrationController {
     SceneManager sm;
     HttpClient client;
 
@@ -27,33 +25,30 @@ public class LoginController {
     @FXML
     PasswordField password;
 
-    @FXML
-    Label alertLabel;
-
-    public LoginController(AppContext ctx,SceneManager manager){
+    public RegistrationController(AppContext ctx,SceneManager manager){
         this.client = HttpClient.newHttpClient();
         this.sm = manager;
-        this.ctx = ctx;
     }
 
     @FXML
-    private void logInRequest() throws IOException, InterruptedException{
+    private void registerNewUserRequest() throws IOException, InterruptedException{
+        // if (username.getAccessibleText() == null || password.getAccessibleText() == null){
+        //     return ;
+        // }
 
-        String username = this.username.getText();
-        String password = this.password.getText();
-
+        //TRYOUT
 
         String payload = """
                 {
                     "username":"%s",
                     "password":"%s"
                 }
-                """.formatted(username,password);
+                """.formatted(this.username.getText(),this.password.getText());
 
         System.out.println(payload);
         HttpRequest request = HttpRequest
         .newBuilder()
-        .uri(URI.create("http://localhost:8080/api/auth/login"))
+        .uri(URI.create("http://localhost:8080/api/auth/register"))
         .header("Content-Type","application/json")
         .POST(BodyPublishers.ofString(payload))
         .build();
@@ -61,23 +56,10 @@ public class LoginController {
         HttpResponse<String> response= client.send(request,BodyHandlers.ofString());
 
         System.out.println(response.statusCode());
-
-        if(response.statusCode() == 200){
-            //go back to menu and add user details to front end context
-            // for future api auth
-            // -> other methods jwt,oauth
-            ctx.setAuthenticatedCredentials(username,password); 
-        }
-        else if (response.statusCode() == 401){
-            alertLabel.setText("invalid credentials");
-            alertLabel.setStyle("-fx-text-fill:red");
-        }
-    }
-    public void goToRegistrationPage(){
-        sm.showRegistration();
     }
 
-    public void goToMenuPage(){
-        sm.showMenu();
+    @FXML
+    public void goToLogInPage(){
+        sm.showLogIn();
     }
 }

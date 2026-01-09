@@ -1,0 +1,30 @@
+.root {
+    -fx-font-family: "Fredoka Small";
+    -fx-font-size:28;
+    -fx-font-weight: bold;
+}
+.pageTitle_label{
+    -fx-font-family: "Fredoka Medium";
+    -fx-font-size:36
+}
+.login_label {
+    -fx-background-radius: 15;
+    -fx-text-fill: black;
+}
+
+.login_entry {
+    -fx-background-radius: 20;
+    -fx-text-fill: black;
+}
+
+.login_bttn {
+    -fx-background-radius: 15;
+    -fx-text-fill: white;
+    -fx-background-color: #1976D2;
+    -fx-font-smoothing-type: lcd
+}
+
+.login_bttn:hover {
+    -fx-cursor: hand;
+    -fx-text-fill: yellow;
+}
