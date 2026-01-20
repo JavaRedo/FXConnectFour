@@ -1,5 +1,6 @@
 package com.javaredo.fxconnectfour_backend.auth;
 
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.http.*;
 import org.springframework.security.authentication.*;
 import org.springframework.security.core.Authentication;
@@ -7,7 +8,13 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import com.javaredo.fxconnectfour_backend.GlobalExceptionHandler;
+import com.javaredo.fxconnectfour_backend.user.AppUserDtos.AppUserLoginDto;
+import com.javaredo.fxconnectfour_backend.user.AppUserDtos.AppUserRegistrationDto;
+
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.ConstraintValidatorContext;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -21,16 +28,15 @@ public class AuthController {
         this.authService = authService;
     }
 
-    public record LoginRequest(String username, String password) {}
-
     @PostMapping("/login")
     public ResponseEntity<?> login(
-        @RequestBody LoginRequest req,
+        @RequestBody AppUserLoginDto req,
         HttpServletRequest httpRequest) {
-            System.out.println(req.username);
-            System.out.println(req.password);
+            System.out.println(req.getUsername());
+            System.out.println(req.getUsername());
+
         UsernamePasswordAuthenticationToken token =
-                new UsernamePasswordAuthenticationToken(req.username, req.password);
+                new UsernamePasswordAuthenticationToken(req.getUsername(), req.getPassword());
 
         try {
             Authentication auth = authManager.authenticate(token);
@@ -44,13 +50,12 @@ public class AuthController {
 
     @PostMapping("/register")
     public ResponseEntity<?> registerNewUser(
-        @RequestBody LoginRequest req,
-        HttpServletRequest httpRequest) {
-            System.out.println(req.username);
-            System.out.println(req.password);
+        @Valid @RequestBody AppUserRegistrationDto req) {
+            System.out.println(req.getUsername());
+            System.out.println(req.getPassword());
         
         // add some username and password validation
-        // username between 3 and 15 chars
+        // username between 5 and 15 chars
         // - have at least one upper case letter
         // password must be
         // - have at least  one Lower case letter
@@ -58,7 +63,7 @@ public class AuthController {
         // - have at least one special charachter 
 
         try{
-            authService.register(req.username,req.password);
+            authService.register(req.getUsername(),req.getPassword());
             return ResponseEntity.ok("user succesfully registered");
         }
         catch(Exception e){
